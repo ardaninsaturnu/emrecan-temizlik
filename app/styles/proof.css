@@ -1,0 +1,284 @@
+/* ==========================================================================
+   Çalışma biçimi, sayılar, taahhütler, galeri, referanslar
+   ========================================================================== */
+
+/* --- Süreç --------------------------------------------------------------- */
+
+.process {
+  position: relative;
+}
+
+.process__steps {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  counter-reset: step;
+}
+
+@media (min-width: 860px) {
+  .process__steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  }
+}
+
+/* Adımları birbirine bağlayan, kaydırmayla dolan çizgi */
+.process__rail {
+  display: none;
+  position: absolute;
+  top: 1.35rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--line);
+}
+
+@media (min-width: 860px) {
+  .process__rail {
+    display: block;
+  }
+}
+
+.process__rail::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background-color: var(--pine);
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left;
+  transition: transform 260ms linear;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding-top: 3.25rem;
+}
+
+.step::before {
+  counter-increment: step;
+  content: "0" counter(step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.7rem;
+  height: 2.7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background-color: var(--bone);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 0.95rem;
+  color: var(--pine);
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.step:hover::before {
+  background-color: var(--pine);
+  border-color: var(--pine);
+  color: var(--bone);
+}
+
+.step__title {
+  font-size: var(--text-md);
+}
+
+.step__text {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* --- Sayılar ------------------------------------------------------------- */
+
+.stats {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.stat {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-dark);
+}
+
+.stat__value {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.6rem, 5vw, 3.9rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--bone);
+}
+
+.stat__label {
+  font-size: var(--text-sm);
+  color: rgba(244, 242, 236, 0.7);
+  max-width: 22ch;
+}
+
+/* --- Taahhütler ---------------------------------------------------------- */
+
+.guarantees {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+.guarantee {
+  display: grid;
+  gap: 0.7rem;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  border-radius: var(--radius-md);
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  align-content: start;
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+.guarantee:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.guarantee__icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background-color: var(--mist);
+  color: var(--pine);
+}
+
+.guarantee__title {
+  font-size: var(--text-md);
+}
+
+.guarantee__text {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* --- Galeri şeridi ------------------------------------------------------- */
+
+.gallery {
+  --gallery-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  overflow: hidden;
+  padding-block: clamp(1rem, 2vw, 2rem);
+}
+
+.gallery__track {
+  display: flex;
+  gap: var(--gallery-gap);
+  width: max-content;
+  animation: gallery-scroll 56s linear infinite;
+}
+
+.gallery:hover .gallery__track {
+  animation-play-state: paused;
+}
+
+.gallery__group {
+  display: flex;
+  gap: var(--gallery-gap);
+}
+
+.gallery__item {
+  position: relative;
+  width: clamp(200px, 26vw, 330px);
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+  filter: saturate(0.92);
+  transition: filter var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+
+.gallery__item:hover {
+  filter: saturate(1.05);
+  transform: scale(1.02);
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes gallery-scroll {
+  to {
+    transform: translateX(calc(-50% - var(--gallery-gap) / 2));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__track {
+    animation: none;
+    overflow-x: auto;
+    width: 100%;
+  }
+}
+
+/* --- Referanslar --------------------------------------------------------- */
+
+.testimonials {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+.testimonial {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  align-content: space-between;
+  padding: clamp(1.6rem, 3vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background-color: var(--bone);
+  transition: background-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+
+.testimonial:hover {
+  background-color: var(--paper);
+  transform: translateY(-4px);
+}
+
+.testimonial__mark {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 3.4rem;
+  line-height: 0.6;
+  color: var(--leaf);
+}
+
+.testimonial__quote {
+  font-size: var(--text-md);
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+}
+
+.testimonial__author {
+  display: grid;
+  gap: 0.15rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-style: normal;
+}
+
+.testimonial__name {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.testimonial__role {
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}

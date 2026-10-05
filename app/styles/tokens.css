@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Tasarım değişkenleri
+   Renk paleti: çam yeşili + kemik beji + kil kırmızısı aksan.
+   ========================================================================== */
+
+:root {
+  /* Yüzeyler */
+  --bone: #f4f2ec;
+  --bone-dim: #eae7df;
+  --paper: #ffffff;
+  --mist: #e6ece5;
+  --sand: #e8dfcf;
+
+  /* Metin */
+  --ink: #131a16;
+  --ink-soft: #55635b;
+  --ink-faint: #8a958d;
+
+  /* Marka */
+  --pine: #0e3a2e;
+  --pine-deep: #092620;
+  --moss: #2f7a5f;
+  --leaf: #7fb99c;
+  --clay: #b0532c;
+
+  /* Çizgi ve gölge */
+  --line: #ddd8cd;
+  --line-strong: #c7c1b4;
+  --line-dark: rgba(255, 255, 255, 0.16);
+  --shadow-sm: 0 1px 2px rgba(19, 26, 22, 0.05), 0 4px 14px rgba(19, 26, 22, 0.05);
+  --shadow-md: 0 2px 6px rgba(19, 26, 22, 0.06), 0 18px 44px rgba(19, 26, 22, 0.09);
+  --shadow-lg: 0 30px 80px rgba(9, 38, 32, 0.18);
+
+  /* Tipografi ölçeği */
+  --text-xs: clamp(0.75rem, 0.74rem + 0.05vw, 0.8rem);
+  --text-sm: clamp(0.875rem, 0.86rem + 0.08vw, 0.925rem);
+  --text-base: clamp(1rem, 0.97rem + 0.14vw, 1.0625rem);
+  --text-md: clamp(1.09rem, 1.03rem + 0.28vw, 1.25rem);
+  --text-lg: clamp(1.35rem, 1.22rem + 0.62vw, 1.75rem);
+  --text-xl: clamp(1.7rem, 1.42rem + 1.35vw, 2.6rem);
+  --text-2xl: clamp(2.15rem, 1.6rem + 2.5vw, 3.6rem);
+  --text-3xl: clamp(2.6rem, 1.55rem + 4.6vw, 5.2rem);
+
+  /* Ölçüler */
+  --container: 1240px;
+  --container-narrow: 900px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-space: clamp(4.5rem, 8vw, 9rem);
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 26px;
+  --radius-xl: 38px;
+  --radius-pill: 999px;
+
+  /* Hareket */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 220ms;
+  --dur: 420ms;
+  --dur-slow: 900ms;
+}

@@ -1,0 +1,393 @@
+/* ==========================================================================
+   Hizmet kartları ve kapsam sekmeleri
+   ========================================================================== */
+
+.services-grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+}
+
+@media (min-width: 1000px) {
+  .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .service-card--wide {
+    grid-column: span 2;
+  }
+}
+
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--paper);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.service-card__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background-color: var(--bone-dim);
+}
+
+.service-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.service-card:hover .service-card__media img {
+  transform: scale(1.06);
+}
+
+.service-card__frequency {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background-color: rgba(244, 242, 236, 0.92);
+  backdrop-filter: blur(6px);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--pine);
+}
+
+.service-card__body {
+  display: grid;
+  gap: 0.75rem;
+  padding: clamp(1.25rem, 2.5vw, 1.9rem);
+  flex: 1;
+  align-content: start;
+}
+
+.service-card__index {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--clay);
+}
+
+.service-card__title {
+  font-size: var(--text-lg);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+}
+
+.service-card__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--clay);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 520ms var(--ease-out);
+}
+
+.service-card:hover .service-card__title::after {
+  transform: scaleX(1);
+}
+
+.service-card__summary {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.service-card__list {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.service-card__list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.service-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.7rem;
+  height: 1px;
+  background-color: var(--line-strong);
+}
+
+.service-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--pine);
+}
+
+.service-card__link svg {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.service-card:hover .service-card__link svg {
+  transform: translateX(4px);
+}
+
+/* Kartın tamamını tıklanabilir yapan görünmez bağlantı katmanı */
+.service-card__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+@media (min-width: 1000px) {
+  .service-card--wide {
+    flex-direction: row;
+  }
+
+  .service-card--wide .service-card__media {
+    flex: 0 0 46%;
+    aspect-ratio: auto;
+  }
+
+  .service-card--wide .service-card__body {
+    padding: clamp(1.75rem, 3vw, 2.75rem);
+    align-content: center;
+  }
+
+  .service-card--wide .service-card__title {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Izgaranın son satırını tamamlayan çağrı paneli */
+.service-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background-color: var(--pine);
+  color: var(--bone);
+}
+
+@media (min-width: 1000px) {
+  .service-cta {
+    grid-column: span 2;
+  }
+}
+
+.service-cta__title {
+  font-size: var(--text-lg);
+  color: var(--bone);
+  margin-bottom: 0.6rem;
+}
+
+.service-cta__text {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: rgba(244, 242, 236, 0.76);
+  max-width: 46ch;
+}
+
+.service-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+/* --- Kapsam sekmeleri ---------------------------------------------------- */
+
+.scope {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+}
+
+@media (min-width: 920px) {
+  .scope {
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    align-items: start;
+  }
+}
+
+.scope__tabs {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.scope__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 920px) {
+  .scope__tabs {
+    flex-direction: column;
+    overflow: visible;
+    border-left: 1px solid var(--line);
+    padding-bottom: 0;
+  }
+}
+
+.scope__tab {
+  position: relative;
+  white-space: nowrap;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-align: left;
+  transition: color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.scope__tab:hover {
+  color: var(--ink);
+}
+
+.scope__tab[aria-selected="true"] {
+  color: var(--pine);
+  font-weight: 600;
+  background-color: var(--mist);
+}
+
+@media (min-width: 920px) {
+  .scope__tab {
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.95rem 1.25rem;
+    white-space: normal;
+  }
+
+  .scope__tab::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--pine);
+    transform: scaleY(0);
+    transition: transform var(--dur) var(--ease-out);
+  }
+
+  .scope__tab[aria-selected="true"]::before {
+    transform: scaleY(1);
+  }
+}
+
+.scope__panel {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  animation: panel-in 620ms var(--ease-out);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (min-width: 620px) {
+  .scope__panel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
+    align-items: start;
+  }
+}
+
+.scope__panel-title {
+  font-size: var(--text-lg);
+  margin-bottom: 0.6rem;
+}
+
+.scope__panel-summary {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin-bottom: 1.4rem;
+}
+
+.scope__list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.scope__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  animation: scope-item-in 560ms var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+@keyframes scope-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+.scope__check {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background-color: var(--mist);
+  color: var(--pine);
+  display: grid;
+  place-items: center;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.scope__media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-md);
+}
+
+.scope__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scope__media-caption {
+  position: absolute;
+  inset: auto 0.75rem 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-md);
+  background-color: rgba(14, 58, 46, 0.82);
+  backdrop-filter: blur(6px);
+  color: var(--bone);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}

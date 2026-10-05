@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="56" viewBox="0 0 220 56" role="img" aria-label="Emre Can Temizlik">
+  <g fill="none" stroke="#0e3a2e">
+    <circle cx="28" cy="28" r="24.5" stroke-width="1.6"/>
+    <path d="M17.5 36.2c6.7.8 12.2-1.4 16.3-6.7 4-5.3 5.2-10.7 3.3-16-7 2.1-11.8 5.2-14.3 9.2-2.6 4.1-4.4 8.6-5.3 13.5Z" fill="#0e3a2e" stroke="none"/>
+    <path d="M17.3 43.5c2.1-5.6 5-10.5 9-14.6" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <text x="66" y="28" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#131a16">Emre Can</text>
+  <text x="67" y="42" font-family="Helvetica, Arial, sans-serif" font-size="8.5" letter-spacing="3.4" fill="#8a958d">TEMİZLİK</text>
+</svg>

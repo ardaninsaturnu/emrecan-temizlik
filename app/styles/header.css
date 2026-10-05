@@ -1,0 +1,313 @@
+/* ==========================================================================
+   Üst bilgi ve menü
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-stuck {
+  background-color: rgba(244, 242, 236, 0.86);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom-color: var(--line);
+}
+
+/* Menü paneli üst bilgi içinde yer aldığı için logo ve düğme üstte kalmalı */
+.site-header__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: 1.15rem;
+  transition: padding-block var(--dur) var(--ease-out);
+}
+
+.site-header.is-stuck .site-header__inner {
+  padding-block: 0.7rem;
+}
+
+/* Menü açıkken koyu zemin üstünde kalan logo ve telefon açık renge döner */
+.site-header.is-menu-open {
+  background-color: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+
+.site-header.is-menu-open .brand__mark,
+.site-header.is-menu-open .brand__name,
+.site-header.is-menu-open .header-phone {
+  color: var(--bone);
+}
+
+.site-header.is-menu-open .brand__sub {
+  color: var(--leaf);
+}
+
+/* --- Logo ---------------------------------------------------------------- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-shrink: 0;
+}
+
+.brand__mark {
+  color: var(--pine);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.brand:hover .brand__mark {
+  transform: rotate(-12deg);
+}
+
+.brand__text {
+  display: grid;
+  line-height: 1;
+}
+
+.brand__name {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.28rem;
+  letter-spacing: -0.02em;
+}
+
+.brand__sub {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.28rem;
+}
+
+/* --- Masaüstü menü ------------------------------------------------------- */
+
+.site-nav {
+  display: none;
+}
+
+@media (min-width: 1060px) {
+  .site-nav {
+    display: block;
+  }
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.9rem);
+}
+
+.site-nav__link {
+  position: relative;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding-block: 0.35rem;
+  transition: color var(--dur) var(--ease-out);
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--clay);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  color: var(--ink);
+}
+
+.site-nav__link:hover::after,
+.site-nav__link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --- Sağ aksiyonlar ------------------------------------------------------ */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-phone {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color var(--dur) var(--ease-out);
+}
+
+.header-phone:hover {
+  color: var(--clay);
+}
+
+@media (min-width: 720px) {
+  .header-phone {
+    display: inline-flex;
+  }
+}
+
+.header-actions .button {
+  display: none;
+}
+
+@media (min-width: 1060px) {
+  .header-actions .button {
+    display: inline-flex;
+  }
+}
+
+/* --- Menü düğmesi -------------------------------------------------------- */
+
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  align-items: center;
+  transition: background-color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+}
+
+.menu-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+@media (min-width: 1060px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.menu-toggle__bar {
+  display: block;
+  width: 1.05rem;
+  height: 1.5px;
+  background-color: var(--ink);
+  transition: transform var(--dur) var(--ease-out), opacity var(--dur-fast) linear;
+}
+
+.menu-toggle[aria-expanded="true"] {
+  border-color: rgba(244, 242, 236, 0.4);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar {
+  background-color: var(--bone);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:first-child {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:last-child {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* --- Mobil menü paneli --------------------------------------------------- */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--pine);
+  color: var(--bone);
+  padding: 7rem var(--gutter) 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  clip-path: circle(0% at calc(100% - 3.5rem) 3rem);
+  transition: clip-path 720ms var(--ease-out);
+  overflow-y: auto;
+}
+
+.mobile-menu[data-open="true"] {
+  clip-path: circle(150% at calc(100% - 3.5rem) 3rem);
+}
+
+.mobile-menu[data-open="false"] {
+  pointer-events: none;
+}
+
+.mobile-menu__list {
+  display: grid;
+  gap: 0.35rem;
+  border-top: 1px solid var(--line-dark);
+}
+
+.mobile-menu__item {
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.05rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.6rem, 7vw, 2.2rem);
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(1.2rem);
+  transition: opacity 520ms var(--ease-out), transform 520ms var(--ease-out), color var(--dur) var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+}
+
+.mobile-menu[data-open="true"] .mobile-menu__link {
+  opacity: 1;
+  transform: none;
+}
+
+.mobile-menu__link:hover {
+  color: var(--leaf);
+}
+
+.mobile-menu__index {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--leaf);
+}
+
+.mobile-menu__footer {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.mobile-menu__phone {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+}
+
+.mobile-menu__meta {
+  font-size: var(--text-sm);
+  color: rgba(244, 242, 236, 0.7);
+}
